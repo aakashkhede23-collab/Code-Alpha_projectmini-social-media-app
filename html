@@ -1,223 +1,139 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<title>Mini Instagram</title>
+<title>SocialSphere</title>
 
 <style>
 body{
     margin:0;
-    font-family:Arial, sans-serif;
-    background:#fafafa;
-}
-
-/* COMMON */
-.center{
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-}
-.box{
-    background:white;
-    padding:25px;
-    width:300px;
-    text-align:center;
-    border-radius:10px;
-    box-shadow:0 10px 25px rgba(0,0,0,.2);
-}
-.box h2{
-    font-family:cursive;
-}
-.box input, .box button{
-    width:100%;
-    padding:10px;
-    margin:6px 0;
-}
-.box button{
-    background:#0095f6;
+    font-family:Arial;
+    background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
     color:white;
-    border:none;
-    cursor:pointer;
 }
-
-/* APP */
 header{
-    background:white;
-    padding:10px;
-    border-bottom:1px solid #ddd;
-    display:flex;
-    justify-content:space-between;
+    background:#0a66c2;
+    padding:12px;
+    text-align:center;
+    font-size:22px;
 }
 .container{
-    max-width:420px;
+    max-width:500px;
     margin:auto;
-    padding-bottom:60px;
-}
-.story-bar{
-    display:flex;
-    overflow-x:auto;
     padding:10px;
-    background:white;
 }
-.story{
+.card{
+    background:white;
+    color:black;
+    border-radius:12px;
+    padding:10px;
+    margin-bottom:12px;
+}
+.profile{
     text-align:center;
-    margin-right:10px;
 }
-.story img{
-    width:60px;
-    height:60px;
+.profile img{
+    width:80px;
     border-radius:50%;
-    border:2px solid red;
 }
-.post{
-    background:white;
-    margin:10px 0;
-    border:1px solid #ddd;
+button{
+    cursor:pointer;
 }
-.post-header{
-    display:flex;
-    align-items:center;
-    padding:8px;
+.follow{
+    background:#0a66c2;
+    color:white;
+    border:none;
+    padding:6px 14px;
+    border-radius:20px;
 }
-.post-header img{
-    width:35px;
-    height:35px;
-    border-radius:50%;
-    margin-right:8px;
-}
-.post img, video{
+video{
     width:100%;
+    border-radius:10px;
 }
 .actions{
-    padding:8px;
-    font-size:20px;
-}
-.bottom{
-    position:fixed;
-    bottom:0;
-    width:100%;
-    background:white;
-    border-top:1px solid #ddd;
     display:flex;
     justify-content:space-around;
-    padding:8px 0;
+    margin-top:5px;
+}
+input{
+    width:100%;
+    padding:6px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- FRONT PAGE -->
-<div id="front" class="center">
-    <div class="box">
-        <h2>Instagram</h2>
-        <p>Connect with friends and the world</p>
-        <button onclick="showLogin()">Log In</button>
-        <button onclick="showSignup()">Sign Up</button>
-    </div>
-</div>
-
-<!-- LOGIN -->
-<div id="login" class="center" style="display:none">
-    <div class="box">
-        <h2>Login</h2>
-        <input id="username" placeholder="Username">
-        <input type="password" placeholder="Password">
-        <button onclick="login()">Login</button>
-        <p onclick="back()" style="cursor:pointer">← Back</p>
-    </div>
-</div>
-
-<!-- SIGNUP -->
-<div id="signup" class="center" style="display:none">
-    <div class="box">
-        <h2>Sign Up</h2>
-        <input placeholder="Username">
-        <input placeholder="Email">
-        <input type="password" placeholder="Password">
-        <button onclick="login()">Create Account</button>
-        <p onclick="back()" style="cursor:pointer">← Back</p>
-    </div>
-</div>
-
-<!-- APP -->
-<div id="app" style="display:none">
-
-<header>
-    <b>Instagram</b>
-    <span>✉️</span>
-</header>
+<header>SocialSphere</header>
 
 <div class="container">
 
-<div class="story-bar">
-    <div class="story"><img src="https://i.imgur.com/6VBx3io.png"><br>You</div>
-    <div class="story"><img src="https://i.imgur.com/1X6xFQF.png"><br>Rahul</div>
-    <div class="story"><img src="https://i.imgur.com/ZcLLrkY.jpg"><br>Pooja</div>
+<!-- PROFILE -->
+<div class="card profile">
+    <img src="https://i.imgur.com/1X6xFQF.png">
+    <h3>Aalok</h3>
+    <button class="follow" onclick="this.innerText=this.innerText=='Follow'?'Following':'Follow'">
+        Follow
+    </button>
 </div>
 
-<div class="post">
-    <div class="post-header">
-        <img src="https://i.imgur.com/1X6xFQF.png">
-        <b>rahul_123</b>
-    </div>
-    <img src="https://i.imgur.com/QIrZWGIs.jpg">
-    <div class="actions">❤️ 💬 📤</div>
-</div>
-
-<div class="post">
-    <div class="post-header">
-        <img src="https://i.imgur.com/ZcLLrkY.jpg">
-        <b>ankit_dev</b>
-    </div>
+<!-- POST 1 -->
+<div class="card">
+    <b>aalok_dev</b>
     <video controls>
         <source src="https://www.w3schools.com/html/mov_bbb.mp4">
     </video>
-    <div class="actions">❤️ 💬 📤</div>
+    <div class="actions">
+        <button onclick="this.innerText=this.innerText=='Like'?'Liked':'Like'">Like</button>
+        <button onclick="this.nextElementSibling.style.display='block'">Comment</button>
+    </div>
+    <input placeholder="Write comment & press Enter"
+    onkeydown="if(event.key=='Enter'){this.insertAdjacentHTML('beforebegin','<p>'+this.value+'</p>');this.value='';}">
+</div>
+
+<!-- POST 2 -->
+<div class="card">
+    <b>rahul_123</b>
+    <video controls>
+        <source src="https://www.w3schools.com/html/movie.mp4">
+    </video>
+    <div class="actions">
+        <button onclick="this.innerText=this.innerText=='Like'?'Liked':'Like'">Like</button>
+        <button onclick="this.nextElementSibling.style.display='block'">Comment</button>
+    </div>
+    <input placeholder="Write comment & press Enter"
+    onkeydown="if(event.key=='Enter'){this.insertAdjacentHTML('beforebegin','<p>'+this.value+'</p>');this.value='';}">
+</div>
+
+<!-- POST 3 -->
+<div class="card">
+    <b>pooja</b>
+    <video controls>
+        <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4">
+    </video>
+    <div class="actions">
+        <button onclick="this.innerText=this.innerText=='Like'?'Liked':'Like'">Like</button>
+        <button onclick="this.nextElementSibling.style.display='block'">Comment</button>
+    </div>
+    <input placeholder="Write comment & press Enter"
+    onkeydown="if(event.key=='Enter'){this.insertAdjacentHTML('beforebegin','<p>'+this.value+'</p>');this.value='';}">
+</div>
+
+<!-- POST 4 -->
+<div class="card">
+    <b>dev_ankit</b>
+    <video controls>
+        <source src="https://media.w3.org/2010/05/sintel/trailer.mp4">
+    </video>
+    <div class="actions">
+        <button onclick="this.innerText=this.innerText=='Like'?'Liked':'Like'">Like</button>
+        <button onclick="this.nextElementSibling.style.display='block'">Comment</button>
+    </div>
+    <input placeholder="Write comment & press Enter"
+    onkeydown="if(event.key=='Enter'){this.insertAdjacentHTML('beforebegin','<p>'+this.value+'</p>');this.value='';}">
 </div>
 
 </div>
-
-<div class="bottom">
-    <span>🏠</span>
-    <span>🔍</span>
-    <span>➕</span>
-    <span>🎬</span>
-    <span>👤</span>
-</div>
-
-</div>
-
-<script>
-const front = document.getElementById("front");
-const loginPage = document.getElementById("login");
-const signupPage = document.getElementById("signup");
-const app = document.getElementById("app");
-
-function showLogin(){
-    front.style.display="none";
-    loginPage.style.display="flex";
-}
-
-function showSignup(){
-    front.style.display="none";
-    signupPage.style.display="flex";
-}
-
-function back(){
-    loginPage.style.display="none";
-    signupPage.style.display="none";
-    front.style.display="flex";
-}
-
-function login(){
-    front.style.display="none";
-    loginPage.style.display="none";
-    signupPage.style.display="none";
-    app.style.display="block";
-}
-</script>
 
 </body>
 </html>
