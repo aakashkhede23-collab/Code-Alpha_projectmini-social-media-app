@@ -1,139 +1,190 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>SocialSphere</title>
+<title>CodeSphere</title>
 
 <style>
+*{box-sizing:border-box;font-family:Arial}
 body{
     margin:0;
-    font-family:Arial;
-    background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+    background:#0b1c2d;
     color:white;
 }
 header{
     background:#0a66c2;
     padding:12px;
-    text-align:center;
     font-size:22px;
+    text-align:center;
 }
-.container{
-    max-width:500px;
-    margin:auto;
+.main{display:flex}
+
+/* LEFT */
+.left{
+    width:18%;
     padding:10px;
 }
-.card{
+.box{
+    background:#12263a;
+    padding:10px;
+    border-radius:10px;
+    margin-bottom:10px;
+}
+
+/* CENTER */
+.center{
+    width:52%;
+    padding:10px;
+}
+.post{
     background:white;
     color:black;
     border-radius:12px;
+    margin-bottom:20px;
     padding:10px;
-    margin-bottom:12px;
-}
-.profile{
-    text-align:center;
-}
-.profile img{
-    width:80px;
-    border-radius:50%;
-}
-button{
-    cursor:pointer;
-}
-.follow{
-    background:#0a66c2;
-    color:white;
-    border:none;
-    padding:6px 14px;
-    border-radius:20px;
-}
-video{
-    width:100%;
-    border-radius:10px;
+    box-shadow:0 6px 15px rgba(0,0,0,.3);
 }
 .actions{
     display:flex;
     justify-content:space-around;
-    margin-top:5px;
+    margin-top:8px;
 }
-input{
+.actions button{
+    border:none;
+    padding:6px 14px;
+    cursor:pointer;
+    border-radius:20px;
+}
+.comment{
     width:100%;
     padding:6px;
+    margin-top:6px;
+}
+
+/* RIGHT */
+.right{
+    width:30%;
+    padding:10px;
+}
+.follow{
+    background:#0a66c2;
+    border:none;
+    padding:4px 10px;
+    color:white;
+    border-radius:20px;
+    cursor:pointer;
 }
 </style>
 </head>
 
 <body>
 
-<header>SocialSphere</header>
+<!-- FACEBOOK SDK -->
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous"
+src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v18.0">
+</script>
 
-<div class="container">
+<header>CodeSphere • Coding Reels</header>
 
-<!-- PROFILE -->
-<div class="card profile">
-    <img src="https://i.imgur.com/1X6xFQF.png">
-    <h3>Aalok</h3>
-    <button class="follow" onclick="this.innerText=this.innerText=='Follow'?'Following':'Follow'">
-        Follow
-    </button>
+<div class="main">
+
+<!-- LEFT -->
+<div class="left">
+    <div class="box"><b>Aalok</b><br>Web Developer</div>
+    <div class="box">🏠 Home</div>
+    <div class="box">💻 Coding Reels</div>
+    <div class="box">👥 Developers</div>
+    <div class="box">📘 Tutorials</div>
 </div>
 
-<!-- POST 1 -->
-<div class="card">
-    <b>aalok_dev</b>
-    <video controls>
-        <source src="https://www.w3schools.com/html/mov_bbb.mp4">
-    </video>
-    <div class="actions">
-        <button onclick="this.innerText=this.innerText=='Like'?'Liked':'Like'">Like</button>
-        <button onclick="this.nextElementSibling.style.display='block'">Comment</button>
-    </div>
-    <input placeholder="Write comment & press Enter"
-    onkeydown="if(event.key=='Enter'){this.insertAdjacentHTML('beforebegin','<p>'+this.value+'</p>');this.value='';}">
+<!-- CENTER FEED -->
+<div class="center">
+
+<!-- REEL 1 -->
+<div class="post">
+<b>Coding Reel</b>
+<div class="fb-video"
+ data-href="https://www.facebook.com/reel/1321840368922562"
+ data-width="auto" data-show-text="false"></div>
+<div class="actions">
+<button onclick="this.innerText=this.innerText=='Like'?'Liked':'Like'">👍 Like</button>
+<button>💬 Comment</button>
+<button>🔗 Share</button>
+</div>
+<input class="comment" placeholder="Write comment & press Enter"
+onkeydown="if(event.key=='Enter'){this.insertAdjacentHTML('beforebegin','<p>'+this.value+'</p>');this.value='';}">
 </div>
 
-<!-- POST 2 -->
-<div class="card">
-    <b>rahul_123</b>
-    <video controls>
-        <source src="https://www.w3schools.com/html/movie.mp4">
-    </video>
-    <div class="actions">
-        <button onclick="this.innerText=this.innerText=='Like'?'Liked':'Like'">Like</button>
-        <button onclick="this.nextElementSibling.style.display='block'">Comment</button>
-    </div>
-    <input placeholder="Write comment & press Enter"
-    onkeydown="if(event.key=='Enter'){this.insertAdjacentHTML('beforebegin','<p>'+this.value+'</p>');this.value='';}">
+<!-- REEL 2 -->
+<div class="post">
+<b>Coding Reel</b>
+<div class="fb-video"
+ data-href="https://www.facebook.com/reel/1118990136683189"
+ data-width="auto" data-show-text="false"></div>
+<div class="actions">
+<button onclick="this.innerText=this.innerText=='Like'?'Liked':'Like'">👍 Like</button>
+<button>💬 Comment</button>
+<button>🔗 Share</button>
+</div>
+<input class="comment" placeholder="Write comment & press Enter"
+onkeydown="if(event.key=='Enter'){this.insertAdjacentHTML('beforebegin','<p>'+this.value+'</p>');this.value='';}">
 </div>
 
-<!-- POST 3 -->
-<div class="card">
-    <b>pooja</b>
-    <video controls>
-        <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4">
-    </video>
-    <div class="actions">
-        <button onclick="this.innerText=this.innerText=='Like'?'Liked':'Like'">Like</button>
-        <button onclick="this.nextElementSibling.style.display='block'">Comment</button>
-    </div>
-    <input placeholder="Write comment & press Enter"
-    onkeydown="if(event.key=='Enter'){this.insertAdjacentHTML('beforebegin','<p>'+this.value+'</p>');this.value='';}">
+<!-- REEL 3 -->
+<div class="post">
+<b>Coding Reel</b>
+<div class="fb-video"
+ data-href="https://www.facebook.com/reel/1134836045394006"
+ data-width="auto" data-show-text="false"></div>
+<div class="actions">
+<button onclick="this.innerText=this.innerText=='Like'?'Liked':'Like'">👍 Like</button>
+<button>💬 Comment</button>
+<button>🔗 Share</button>
+</div>
+<input class="comment" placeholder="Write comment & press Enter"
+onkeydown="if(event.key=='Enter'){this.insertAdjacentHTML('beforebegin','<p>'+this.value+'</p>');this.value='';}">
 </div>
 
-<!-- POST 4 -->
-<div class="card">
-    <b>dev_ankit</b>
-    <video controls>
-        <source src="https://media.w3.org/2010/05/sintel/trailer.mp4">
-    </video>
-    <div class="actions">
-        <button onclick="this.innerText=this.innerText=='Like'?'Liked':'Like'">Like</button>
-        <button onclick="this.nextElementSibling.style.display='block'">Comment</button>
+<!-- REEL 4 -->
+<div class="post">
+<b>Coding Reel</b>
+<div class="fb-video"
+ data-href="https://www.facebook.com/reel/338489818552954"
+ data-width="auto" data-show-text="false"></div>
+<div class="actions">
+<button onclick="this.innerText=this.innerText=='Like'?'Liked':'Like'">👍 Like</button>
+<button>💬 Comment</button>
+<button>🔗 Share</button>
+</div>
+<input class="comment" placeholder="Write comment & press Enter"
+onkeydown="if(event.key=='Enter'){this.insertAdjacentHTML('beforebegin','<p>'+this.value+'</p>');this.value='';}">
+</div>
+
+</div>
+
+<!-- RIGHT -->
+<div class="right">
+    <div class="box">
+        <b>Suggested Developers</b><br><br>
+        Rahul_JS <button class="follow" onclick="this.innerText=this.innerText=='Follow'?'Following':'Follow'">Follow</button><br><br>
+        Neha_Python <button class="follow" onclick="this.innerText=this.innerText=='Follow'?'Following':'Follow'">Follow</button><br><br>
+        Ankit_Java <button class="follow" onclick="this.innerText=this.innerText=='Follow'?'Following':'Follow'">Follow</button>
     </div>
-    <input placeholder="Write comment & press Enter"
-    onkeydown="if(event.key=='Enter'){this.insertAdjacentHTML('beforebegin','<p>'+this.value+'</p>');this.value='';}">
+
+    <div class="box">
+        <b>Trending</b><br>
+        #JavaScript<br>
+        #Python<br>
+        #WebDevelopment<br>
+        #CodingReels
+    </div>
 </div>
 
 </div>
 
 </body>
 </html>
+
+
+
