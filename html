@@ -2,77 +2,132 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CodeSphere</title>
 
 <style>
 *{box-sizing:border-box;font-family:Arial}
 body{
-    margin:0;
-    background:#0b1c2d;
-    color:white;
+  margin:0;
+  background:#0b1c2d;
+  color:white;
 }
 header{
-    background:#0a66c2;
-    padding:12px;
-    font-size:22px;
-    text-align:center;
+  background:#0a66c2;
+  padding:12px;
+  font-size:22px;
+  text-align:center;
 }
-.main{display:flex}
+.main{display:flex;flex-wrap:wrap}
 
 /* LEFT */
 .left{
-    width:18%;
-    padding:10px;
+  width:18%;
+  padding:10px;
 }
 .box{
-    background:#12263a;
-    padding:10px;
-    border-radius:10px;
-    margin-bottom:10px;
+  background:#12263a;
+  padding:10px;
+  border-radius:10px;
+  margin-bottom:10px;
+  cursor:pointer;
 }
 
 /* CENTER */
 .center{
-    width:52%;
-    padding:10px;
+  width:52%;
+  padding:10px;
 }
 .post{
-    background:white;
-    color:black;
-    border-radius:12px;
-    margin-bottom:20px;
-    padding:10px;
-    box-shadow:0 6px 15px rgba(0,0,0,.3);
+  background:white;
+  color:black;
+  border-radius:12px;
+  margin-bottom:25px;
+  padding:10px;
+  position:relative;
 }
+
+/* VIDEO */
+.video-wrap{position:relative}
+
+/* ACTION BUTTONS */
 .actions{
-    display:flex;
-    justify-content:space-around;
-    margin-top:8px;
+  position:absolute;
+  right:10px;
+  bottom:15px;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
 }
 .actions button{
-    border:none;
-    padding:6px 14px;
-    cursor:pointer;
-    border-radius:20px;
+  width:42px;
+  height:42px;
+  border:none;
+  border-radius:50%;
+  cursor:pointer;
+  background:#0a66c2;
+  color:white;
+  font-size:18px;
 }
-.comment{
-    width:100%;
-    padding:6px;
-    margin-top:6px;
+
+/* COMMENT */
+.comment-box{
+  display:none;
+  margin-top:10px;
+}
+.comment-box input{
+  width:100%;
+  padding:6px;
 }
 
 /* RIGHT */
 .right{
-    width:30%;
-    padding:10px;
+  width:30%;
+  padding:10px;
 }
 .follow{
-    background:#0a66c2;
-    border:none;
-    padding:4px 10px;
-    color:white;
-    border-radius:20px;
-    cursor:pointer;
+  background:#0a66c2;
+  border:none;
+  padding:4px 10px;
+  color:white;
+  border-radius:20px;
+  cursor:pointer;
+}
+
+/* LOGIN MODAL */
+#loginModal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.85);
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+}
+.login-box{
+  background:#12263a;
+  padding:20px;
+  width:300px;
+  border-radius:10px;
+}
+.login-box h3{text-align:center}
+.login-box input{
+  width:100%;
+  padding:8px;
+  margin:8px 0;
+}
+.login-box button{
+  width:100%;
+  padding:8px;
+  background:#0a66c2;
+  border:none;
+  color:white;
+  cursor:pointer;
+}
+
+/* MOBILE */
+@media(max-width:900px){
+  .left,.right,.center{width:100%}
 }
 </style>
 </head>
@@ -82,109 +137,116 @@ header{
 <!-- FACEBOOK SDK -->
 <div id="fb-root"></div>
 <script async defer crossorigin="anonymous"
-src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v18.0">
-</script>
+src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v18.0"></script>
 
 <header>CodeSphere • Coding Reels</header>
 
 <div class="main">
 
-<!-- LEFT -->
+<!-- LEFT MENU -->
 <div class="left">
-    <div class="box"><b>Aalok</b><br>Web Developer</div>
-    <div class="box">🏠 Home</div>
-    <div class="box">💻 Coding Reels</div>
-    <div class="box">👥 Developers</div>
-    <div class="box">📘 Tutorials</div>
+  <div class="box"><b>Aalok</b><br>Web Developer</div>
+  <div class="box" onclick="show('home')">🏠 Home</div>
+  <div class="box" onclick="show('reels')">💻 Coding Reels</div>
+  <div class="box" onclick="show('developers')">👥 Developers</div>
+  <div class="box" onclick="show('tutorials')">📘 Tutorials</div>
+  <div class="box" onclick="openLogin()">🔐 Login</div>
 </div>
 
-<!-- CENTER FEED -->
+<!-- CENTER -->
 <div class="center">
 
-<!-- REEL 1 -->
-<div class="post">
-<b>Coding Reel</b>
-<div class="fb-video"
- data-href="https://www.facebook.com/reel/1321840368922562"
- data-width="auto" data-show-text="false"></div>
-<div class="actions">
-<button onclick="this.innerText=this.innerText=='Like'?'Liked':'Like'">👍 Like</button>
-<button>💬 Comment</button>
-<button>🔗 Share</button>
-</div>
-<input class="comment" placeholder="Write comment & press Enter"
-onkeydown="if(event.key=='Enter'){this.insertAdjacentHTML('beforebegin','<p>'+this.value+'</p>');this.value='';}">
+<div id="home" class="post section">
+<b>Welcome to CodeSphere 👋</b><br><br>
+This is the Home section.
 </div>
 
-<!-- REEL 2 -->
-<div class="post">
-<b>Coding Reel</b>
-<div class="fb-video"
- data-href="https://www.facebook.com/reel/1118990136683189"
- data-width="auto" data-show-text="false"></div>
-<div class="actions">
-<button onclick="this.innerText=this.innerText=='Like'?'Liked':'Like'">👍 Like</button>
-<button>💬 Comment</button>
-<button>🔗 Share</button>
-</div>
-<input class="comment" placeholder="Write comment & press Enter"
-onkeydown="if(event.key=='Enter'){this.insertAdjacentHTML('beforebegin','<p>'+this.value+'</p>');this.value='';}">
-</div>
+<div id="reels" class="section"></div>
 
-<!-- REEL 3 -->
-<div class="post">
-<b>Coding Reel</b>
-<div class="fb-video"
- data-href="https://www.facebook.com/reel/1134836045394006"
- data-width="auto" data-show-text="false"></div>
-<div class="actions">
-<button onclick="this.innerText=this.innerText=='Like'?'Liked':'Like'">👍 Like</button>
-<button>💬 Comment</button>
-<button>🔗 Share</button>
-</div>
-<input class="comment" placeholder="Write comment & press Enter"
-onkeydown="if(event.key=='Enter'){this.insertAdjacentHTML('beforebegin','<p>'+this.value+'</p>');this.value='';}">
-</div>
-
-<!-- REEL 4 -->
-<div class="post">
-<b>Coding Reel</b>
-<div class="fb-video"
- data-href="https://www.facebook.com/reel/338489818552954"
- data-width="auto" data-show-text="false"></div>
-<div class="actions">
-<button onclick="this.innerText=this.innerText=='Like'?'Liked':'Like'">👍 Like</button>
-<button>💬 Comment</button>
-<button>🔗 Share</button>
-</div>
-<input class="comment" placeholder="Write comment & press Enter"
-onkeydown="if(event.key=='Enter'){this.insertAdjacentHTML('beforebegin','<p>'+this.value+'</p>');this.value='';}">
+<div id="tutorials" class="post section" style="display:none">
+<b>Tutorials</b><br><br>
+HTML • CSS • JavaScript • React
 </div>
 
 </div>
 
 <!-- RIGHT -->
-<div class="right">
-    <div class="box">
-        <b>Suggested Developers</b><br><br>
-        Rahul_JS <button class="follow" onclick="this.innerText=this.innerText=='Follow'?'Following':'Follow'">Follow</button><br><br>
-        Neha_Python <button class="follow" onclick="this.innerText=this.innerText=='Follow'?'Following':'Follow'">Follow</button><br><br>
-        Ankit_Java <button class="follow" onclick="this.innerText=this.innerText=='Follow'?'Following':'Follow'">Follow</button>
-    </div>
-
-    <div class="box">
-        <b>Trending</b><br>
-        #JavaScript<br>
-        #Python<br>
-        #WebDevelopment<br>
-        #CodingReels
-    </div>
+<div class="right section" id="developers" style="display:none">
+<div class="box">
+<b>Suggested Developers</b><br><br>
+Rahul_JS <button class="follow" onclick="follow(this)">Follow</button><br><br>
+Neha_Python <button class="follow" onclick="follow(this)">Follow</button><br><br>
+Ankit_Java <button class="follow" onclick="follow(this)">Follow</button>
+</div>
 </div>
 
 </div>
+
+<!-- LOGIN MODAL -->
+<div id="loginModal">
+  <div class="login-box">
+    <h3>Login</h3>
+    <input placeholder="Username">
+    <input type="password" placeholder="Password">
+    <button onclick="closeLogin()">Login</button><br><br>
+    <button onclick="closeLogin()">Close</button>
+  </div>
+</div>
+
+<script>
+const reels = [
+ "https://www.facebook.com/reel/1886642061988879",
+ "https://www.facebook.com/reel/1118990136683189",
+ "https://www.facebook.com/reel/1134836045394006",
+ "https://www.facebook.com/reel/338489818552954"
+];
+
+const reelsBox = document.getElementById("reels");
+reels.forEach(link=>{
+  reelsBox.innerHTML += `
+  <div class="post">
+    <b>Coding Reel</b>
+    <div class="video-wrap">
+      <div class="fb-video" data-href="${link}" data-width="500"></div>
+      <div class="actions">
+        <button onclick="like(this)">👍</button>
+        <button onclick="toggleComment(this)">💬</button>
+        <button onclick="share('${link}')">🔗</button>
+      </div>
+    </div>
+    <div class="comment-box">
+      <input placeholder="Write comment & press Enter" onkeydown="addComment(event,this)">
+    </div>
+  </div>`;
+});
+
+setTimeout(()=>{ if(window.FB) FB.XFBML.parse(); },1000);
+
+function show(id){
+  document.querySelectorAll(".section").forEach(s=>s.style.display="none");
+  document.getElementById(id).style.display="block";
+  if(id==="reels" && window.FB) FB.XFBML.parse();
+}
+
+function openLogin(){ loginModal.style.display="flex"; }
+function closeLogin(){ loginModal.style.display="none"; }
+
+function like(btn){ btn.innerText = btn.innerText==="👍"?"❤️":"👍"; }
+function toggleComment(btn){
+  let box = btn.closest(".post").querySelector(".comment-box");
+  box.style.display = box.style.display==="block"?"none":"block";
+}
+function addComment(e,input){
+  if(e.key==="Enter"){ alert("Comment: "+input.value); input.value=""; }
+}
+function share(link){
+  navigator.clipboard.writeText(link);
+  alert("Reel link copied");
+}
+function follow(btn){
+  btn.innerText = btn.innerText==="Follow"?"Following":"Follow";
+}
+</script>
 
 </body>
 </html>
-
-
-
